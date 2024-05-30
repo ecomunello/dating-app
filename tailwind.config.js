@@ -22,16 +22,16 @@ module.exports = {
       themes: {
         light: {
           colors: {
-            primary: "#301050",
+            primary: "#F5A524",
             secondary: "#920B3A",
             background:"#F4F4F5"
           }
         },
         dark: {
           colors: {
-            primary: "#FFD34E",
-            secondary: "#EE457E",
-            background: "#E1CA9E"
+            primary: "#F5A524",
+            secondary: "#C20E4D",
+            background: "#18181B"
           }
         },
       },

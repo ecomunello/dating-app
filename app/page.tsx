@@ -6,9 +6,13 @@ import { button as buttonStyles } from "@nextui-org/theme";
 import {BrokenHeartIcon} from '../components/icon/BrokenHeartIcon';
 import {HeartIcon} from '../components/icon/HeartIcon';
 import {DialogIcon} from "../components/icon/DialogIcon";
+import {BatteryChargeIcon} from "../components/icon/BatteryChargeIcon";
+import {BatteryLowIcon} from "../components/icon/BatteryLowIcon";
+import {MaskHapplyIcon} from "../components/icon/MaskHapplyIcon";
+import {MaskSadIcon} from "../components/icon/MaskSadIcon";
 import {Card, CardFooter, Image, CardBody} from "@nextui-org/react"
 import {Switch, cn} from "@nextui-org/react";
-
+import {Button} from "@nextui-org/react";
 
 import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
@@ -76,8 +80,8 @@ export default function Home() {
           aria-label="Volume"
           size="lg"
           color="secondary"
-          startContent={<BrokenHeartIcon className="text-2xl" />}
-          endContent={<HeartIcon className="text-2xl" />}
+          startContent={<BatteryLowIcon className="text-2xl" />}
+          endContent={<BatteryChargeIcon className="text-2xl" />}
           className="max-w-md"
           showTooltip={true}
           showSteps={true} 
@@ -96,8 +100,8 @@ export default function Home() {
           aria-label="Volume"
           size="lg"
           color="secondary"
-          startContent={<BrokenHeartIcon className="text-2xl" />}
-          endContent={<DialogIcon className="text-2xl" />}
+          startContent={<MaskSadIcon className="text-2xl" />}
+          endContent={<MaskHapplyIcon className="text-2xl" />}
           className="max-w-md"
           showTooltip={true}
           showSteps={true} 
@@ -132,6 +136,10 @@ export default function Home() {
           </p>
         </div>
       </Switch>
+
+      <Button color="primary">
+        Vota
+      </Button>  
 
     </section>
   );
