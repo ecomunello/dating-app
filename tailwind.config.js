@@ -23,7 +23,7 @@ module.exports = {
         light: {
           colors: {
             primary: "#F5A524",
-            secondary: "#920B3A",
+            secondary: "#e879f9",
             background:"#F4F4F5"
           }
         },
