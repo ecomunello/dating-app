@@ -5,7 +5,7 @@ export const siteConfig = {
   description: "Make beautiful websites regardless of your design experience.",
   navItems: [
     {
-      label: "Dating",
+      label: "Incontri",
       href: "/dating",
     },
     {
@@ -15,7 +15,7 @@ export const siteConfig = {
   ],
   navMenuItems: [
     {
-      label: "Meeting",
+      label: "Incontri",
       href: "/dating",
     },
     {

@@ -20,7 +20,7 @@ export default function DatingPage() {
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
       
       <div className="inline-block max-w-lg text-center justify-center">
-        <p className="text-3xl">In meeting </p>
+        <p className="text-3xl">Prossimo incontro </p>
         <p className="text-2xl text-pink-600">
            con...&nbsp;
         </p>
@@ -45,10 +45,7 @@ export default function DatingPage() {
         </Card>
       </div> */}
       
-      <div className="flex flex-col gap-6 w-full max-w-md">
-        <Progress label="Meeting fatti" showValueLabel={true} color="primary" size="sm" aria-label="Loading..." value={40} />
-      </div> 
-
+     
       <p className="text-xl font-bold">Posto 10 - Avocado</p>
 
       <div className="flex gap-3 items-center">
@@ -58,6 +55,11 @@ export default function DatingPage() {
         <Avatar showFallback isBordered radius="full" isDisabled  src="./fruit-2.jpeg" size="lg" />
         <Avatar showFallback isBordered radius="full" isDisabled  src="./fruit-4.jpeg" className="w-6 h-6 text-tiny"  />
       </div>
+
+      <div className="flex flex-col gap-6 w-full max-w-md">
+        <Progress label="Incontri fatti" showValueLabel={true} color="primary" size="sm" aria-label="Loading..." value={40} />
+      </div> 
+
 
       <h2 className={subtitle({ class: "mt-4" })}>
           Attratività

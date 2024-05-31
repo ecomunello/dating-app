@@ -20,13 +20,13 @@ export default function DatingPage() {
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
       
       <div className="inline-block max-w-lg text-center justify-center">
-        <p className="text-3xl">Meeting</p>
+        <p className="text-3xl">Dashboard</p>
         <p className="text-2xl text-pink-600">
-          Dashboard&nbsp;
+          Incontri&nbsp;
         </p>
       </div>
       <h2 className="text-xl">
-          I tuoi 5 meeting migliori:
+          I tuoi 5 incontri migliori:
       </h2>
       <div className="grid grid-cols-1 gap-4">
       <div className="text-center justify-center">
@@ -35,7 +35,7 @@ export default function DatingPage() {
             Pesca&nbsp;
           </p>
           <Button size="sm" color="primary">
-            Contatto
+            Contatta
           </Button> 
         </div>
       </div>
@@ -46,7 +46,7 @@ export default function DatingPage() {
             Avocado&nbsp;
           </p>
           <Button size="sm" color="primary">
-            Contatto
+          Contatta
           </Button> 
         </div>
 
@@ -56,7 +56,7 @@ export default function DatingPage() {
             Anguria&nbsp;
           </p>
           <Button size="sm" color="primary">
-            Contatto
+          Contatta
           </Button> 
         </div>
 
@@ -66,7 +66,7 @@ export default function DatingPage() {
             Limone&nbsp;
           </p>
           <Button size="sm" color="primary">
-            Contatto
+          Contatta
           </Button> 
         </div>
 
@@ -76,7 +76,7 @@ export default function DatingPage() {
             Banana&nbsp;
           </p>
           <Button size="sm" color="primary">
-            Contatto
+          Contatta
           </Button> 
         </div>
 
@@ -104,7 +104,7 @@ export default function DatingPage() {
         <div className="flex flex-col gap-1">
           <p className="text-medium font-bold">Condividi Contatto</p>
           <p className="text-tiny text-default-400">
-          Se queste persone lo richiedono condivideremo in automatio il tuo contatto
+          Se queste persone lo richiedono condivideremo in automatio il tuo contatto IG
           </p>
         </div>
       </Switch>
