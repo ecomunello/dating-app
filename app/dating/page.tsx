@@ -67,11 +67,11 @@ export default async function DatingPage() {
       <p className="text-xl font-bold">Posto 10 - {dataNext[0].nome}</p>
 
       <div className="flex gap-3 items-center">
-        <Avatar showFallback isBordered radius="full" isDisabled src={dataPrev[0].src} className="w-6 h-6 text-tiny"  />
-        <Avatar showFallback isBordered radius="full" isDisabled  src={dataPrev[1].src} size="lg" />
+        <Avatar showFallback isBordered radius="full" isDisabled src={dataPrev[0].src} className="w-6 h-6 text-tiny opacity-20"  />
+        <Avatar showFallback isBordered radius="full" isDisabled  src={dataPrev[1].src} className="w-20 h-20 text-tiny opacity-45" />
         <Avatar showFallback isBordered radius="full" src={dataNext[0].src} className="w-32 h-32 text-large" />
-        <Avatar showFallback isBordered radius="full" isDisabled  src={dataNext[1].src} size="lg" />
-        <Avatar showFallback isBordered radius="full" isDisabled  src={dataNext[2].src} className="w-6 h-6 text-tiny"  />
+        <Avatar showFallback isBordered radius="full" isDisabled  src={dataNext[1].src} className="w-20 h-20 text-tiny opacity-45" />
+        <Avatar showFallback isBordered radius="full" isDisabled  src={dataNext[2].src} className="w-6 h-6 text-tiny opacity-20"  />
       </div>
 
       <div className="flex flex-col gap-6 w-full max-w-md">
