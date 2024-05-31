@@ -75,7 +75,7 @@ export default async function DatingPage() {
       </div>
 
       <div className="flex flex-col gap-6 w-full max-w-md">
-        <Progress maxValue={10} label="Incontri fatti" showValueLabel={true} color="primary" size="sm" aria-label="Loading..." value={meetingDonePerc} />
+        <Progress label="Incontri fatti" showValueLabel={true} color="primary" size="sm" aria-label="Loading..." value={meetingDonePerc} />
       </div> 
 
 
