@@ -10,12 +10,65 @@ import {Button} from "@nextui-org/react";
 import {Avatar} from "@nextui-org/react";
 import {Textarea} from "@nextui-org/react";
 import {Progress} from "@nextui-org/react";
+import { headers } from 'next/headers';
 
 import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
+import type { InferGetStaticPropsType, GetStaticProps } from 'next'
 
-export default function DatingPage() {
-  
+type User = {
+  id: string
+  nome: string
+  url: string
+}
+
+async function getDataActual() {
+  const headersList = headers();
+  const res = await fetch("http://" + headersList.get('host') + "/api/user?type=actual")
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
+ 
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data')
+  }
+ 
+  return res.json()
+}
+
+async function getDataPrev() {
+  const headersList = headers();
+  const res = await fetch("http://" + headersList.get('host') + "/api/user?type=prev")
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
+ 
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data')
+  }
+ 
+  return res.json()
+}
+async function getDataNext() {
+  const headersList = headers();
+  const res = await fetch("http://" + headersList.get('host') + "/api/user?type=next")
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
+ 
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data')
+  }
+ 
+  return res.json()
+}
+export default async function DatingPage() {
+  const dataActual = await getDataActual()
+  const dataPrev = await getDataPrev()
+  const dataNext = await getDataNext()
+
+  const meetingDonePerc = Math.round(dataPrev.length / (dataActual.length + dataNext.length + dataPrev.length)*100)
+ 
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
       
@@ -24,40 +77,20 @@ export default function DatingPage() {
         <p className="text-2xl text-pink-600">
            con...&nbsp;
         </p>
-      </div>
-{/* 
-      <div className="flex gap-4 items-center">
-        <Card shadow="sm" radius="lg">
-          <CardBody className="overflow-visible p-0 basis-1/2">
-            <Image
-              shadow="sm"
-              radius="lg"
-              height={100}
-              alt="Banana"
-              src="./fruit-5.jpeg"
-            />
-          </CardBody>
-          <CardFooter className="text-small justify-between">
-            <b className="text-medium">
-              Avocado
-            </b>
-          </CardFooter>
-        </Card>
-      </div> */}
-      
+      </div>    
      
-      <p className="text-xl font-bold">Posto 10 - Avocado</p>
+      <p className="text-xl font-bold">Posto 10 - {dataActual[0].nome}</p>
 
       <div className="flex gap-3 items-center">
-        <Avatar showFallback isBordered radius="full" isDisabled src="./fruit-8.jpeg" className="w-6 h-6 text-tiny"  />
-        <Avatar showFallback isBordered radius="full" isDisabled  src="./fruit-7.jpeg" size="lg" />
-        <Avatar showFallback isBordered radius="full" src="./fruit-5.jpeg" className="w-32 h-32 text-large" />
-        <Avatar showFallback isBordered radius="full" isDisabled  src="./fruit-2.jpeg" size="lg" />
-        <Avatar showFallback isBordered radius="full" isDisabled  src="./fruit-4.jpeg" className="w-6 h-6 text-tiny"  />
+        <Avatar showFallback isBordered radius="full" isDisabled src={dataPrev[0].src} className="w-6 h-6 text-tiny"  />
+        <Avatar showFallback isBordered radius="full" isDisabled  src={dataPrev[1].src} size="lg" />
+        <Avatar showFallback isBordered radius="full" src={dataActual[0].src} className="w-32 h-32 text-large" />
+        <Avatar showFallback isBordered radius="full" isDisabled  src={dataNext[0].src} size="lg" />
+        <Avatar showFallback isBordered radius="full" isDisabled  src={dataNext[1].src} className="w-6 h-6 text-tiny"  />
       </div>
 
       <div className="flex flex-col gap-6 w-full max-w-md">
-        <Progress label="Incontri fatti" showValueLabel={true} color="primary" size="sm" aria-label="Loading..." value={40} />
+        <Progress label="Incontri fatti" showValueLabel={true} color="primary" size="sm" aria-label="Loading..." value={meetingDonePerc} />
       </div> 
 
 
@@ -77,7 +110,7 @@ export default function DatingPage() {
           showSteps={true} 
           step={1} 
           maxValue={10}
-          minValue={0}
+          minValue={1}
           defaultValue={5}
         />
       </div>
@@ -98,7 +131,7 @@ export default function DatingPage() {
           showSteps={true} 
           step={1} 
           maxValue={10}
-          minValue={0}
+          minValue={1}
           defaultValue={5}
         />
       </div>
@@ -119,7 +152,7 @@ export default function DatingPage() {
           showSteps={true} 
           step={1} 
           maxValue={10}
-          minValue={0}
+          minValue={1}
           defaultValue={5}
         />
       </div>
