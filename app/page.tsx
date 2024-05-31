@@ -15,10 +15,10 @@ export default function Home() {
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
       
       <div className="inline-block max-w-lg text-center justify-center">
-        <span className="text-4xl">Meeting </span>
-        <span className="text-4xl text-pink-600">
-           App&nbsp;
-        </span>
+        <h1 className="text-3xl">Conosci nuovi </h1>
+        <h1 className="text-5xl text-pink-600">
+           Amici
+        </h1>
       </div>
 
       <div className="flex gap-3 items-center">
