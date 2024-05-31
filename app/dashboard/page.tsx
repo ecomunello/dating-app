@@ -1,3 +1,4 @@
+'use client'
 import {Slider} from "@nextui-org/slider";
 import {BrokenHeartIcon} from '../../components/icon/BrokenHeartIcon';
 import {HeartIcon} from '../../components/icon/HeartIcon';
@@ -6,16 +7,18 @@ import {BatteryLowIcon} from "../../components/icon/BatteryLowIcon";
 import {MaskHapplyIcon} from "../../components/icon/MaskHapplyIcon";
 import {MaskSadIcon} from "../../components/icon/MaskSadIcon";
 import {Switch, cn} from "@nextui-org/react";
-import {Button} from "@nextui-org/react";
 import {Avatar} from "@nextui-org/react";
 import {User} from "@nextui-org/react";
 import {UserIcon} from '../../components/icon/UserIcon';
+import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
+import {Link} from "@nextui-org/react";
 
 import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 
 export default function DatingPage() {
-  
+  const {isOpen, onOpen, onOpenChange} = useDisclosure();
+
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
       
@@ -34,9 +37,28 @@ export default function DatingPage() {
           <p className="text-xl" >
             Pesca&nbsp;
           </p>
-          <Button size="sm" color="primary">
+          <Button  onPress={onOpen} size="sm" color="primary">
             Contatta
-          </Button> 
+          </Button>
+          <Modal backdrop="blur" isOpen={isOpen} size="sm" placement="center" onOpenChange={onOpenChange}>
+            <ModalContent>
+              {(onClose) => (
+                <>
+                  <ModalHeader className="flex flex-col gap-1">Contatto</ModalHeader>
+                  <ModalBody>
+
+                  <Button href="https://www.instagram.com/nomeprofiloIG" as={Link} >Instagram: @nomeprofiloIG</Button> 
+                    
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button color="danger" variant="bordered" onPress={onClose}>
+                      Close
+                    </Button>
+                  </ModalFooter>
+                </>
+              )}
+            </ModalContent>
+          </Modal>
         </div>
       </div>
       <div className="grid grid-cols-2 gap-8">
@@ -45,7 +67,7 @@ export default function DatingPage() {
           <p className="text-xl" >
             Avocado&nbsp;
           </p>
-          <Button size="sm" color="primary">
+          <Button onPress={onOpen} size="sm" color="primary">
           Contatta
           </Button> 
         </div>
@@ -55,7 +77,7 @@ export default function DatingPage() {
           <p className="text-xl">
             Anguria&nbsp;
           </p>
-          <Button size="sm" color="primary">
+          <Button onPress={onOpen} size="sm" color="primary">
           Contatta
           </Button> 
         </div>
@@ -65,7 +87,7 @@ export default function DatingPage() {
           <p className="text-xl" >
             Limone&nbsp;
           </p>
-          <Button size="sm" color="primary">
+          <Button onPress={onOpen} size="sm" color="primary">
           Contatta
           </Button> 
         </div>
@@ -75,12 +97,13 @@ export default function DatingPage() {
           <p className="text-xl">
             Banana&nbsp;
           </p>
-          <Button size="sm" color="primary">
+          <Button onPress={onOpen} size="sm" color="primary">
           Contatta
           </Button> 
         </div>
 
       </div>
+      
       <br/>
       <Switch
         color="danger"
