@@ -22,11 +22,9 @@ export default function Home() {
       </div>
 
       <div className="flex gap-3 items-center">
-        <Avatar isBordered radius="full" src="./fruit-8.jpeg" className="w-6 h-6 text-tiny"  />
-        <Avatar isBordered radius="full" src="./fruit-7.jpeg" size="lg" />
-        <Avatar isBordered radius="full" src="./fruit-5.jpeg" className="w-32 h-32 text-large" />
-        <Avatar isBordered radius="full" src="./fruit-2.jpeg" size="lg" />
-        <Avatar isBordered radius="full" src="./fruit-4.jpeg" className="w-6 h-6 text-tiny"  />
+        <Avatar isBordered radius="full" src="./fruit-8.jpeg" className="w-20 h-20 text-large" />
+        <Avatar isBordered radius="full" src="./logo-app.png" className="w-40 h-40 text-large" />
+        <Avatar isBordered radius="full" src="./fruit-2.jpeg" className="w-20 h-20 text-large" />
       </div>
 
       <form className="flex w-full flex-wrap md:flex-nowrap gap-4 items-center">
