@@ -9,22 +9,14 @@ export const siteConfig = {
       href: "/dating",
     },
     {
-      label: "Profile",
-      href: "/profile",
-    },
-    {
       label: "Dashboard",
       href: "/dashboard",
     }
   ],
   navMenuItems: [
     {
-      label: "Dating",
+      label: "Meeting",
       href: "/dating",
-    },
-    {
-      label: "Profile",
-      href: "/profile",
     },
     {
       label: "Dashboard",

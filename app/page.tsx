@@ -15,7 +15,7 @@ export default function Home() {
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
       
       <div className="inline-block max-w-lg text-center justify-center">
-        <span className="text-4xl">Dating </span>
+        <span className="text-4xl">Meeting </span>
         <span className="text-4xl text-pink-600">
            App&nbsp;
         </span>
@@ -30,10 +30,13 @@ export default function Home() {
       </div>
 
       <form className="flex w-full flex-wrap md:flex-nowrap gap-4 items-center">
-      <span className="text-xl">Dati Giocatore</span>
-      <Input isRequired variant="faded" type="email" label="Email" placeholder="Inserisci la tua mail" />
-      <Input isRequired variant="faded" type="password" label="Password" placeholder="Inserisci la tua password" />
+      <span className="text-xl">Dati Partecipante</span>
+      <Input isRequired variant="faded" type="tezt" label="Nickname" value="Avocado" placeholder="Inserisci il tuo utente" />
+      <Input isRequired variant="faded" type="password" label="Codice Accesso" value="1234" placeholder="Inserisci la tua password" />
+      <Input variant="faded" type="text" label="Contatto IG" value="@profiloig" placeholder="Inserisci il tuo profilo IG" />
       <Button href="/dating" as={Link} color="primary">Inizia a giocare</Button> 
+      
+
       </form>
 
     </section>

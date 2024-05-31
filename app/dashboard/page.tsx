@@ -34,7 +34,7 @@ export default function DatingPage() {
           <p className="text-xl" >
             Pesca&nbsp;
           </p>
-          <Button size="sm">
+          <Button size="sm" color="primary">
             Contatto
           </Button> 
         </div>
@@ -45,7 +45,7 @@ export default function DatingPage() {
           <p className="text-xl" >
             Avocado&nbsp;
           </p>
-          <Button size="sm">
+          <Button size="sm" color="primary">
             Contatto
           </Button> 
         </div>
@@ -55,7 +55,7 @@ export default function DatingPage() {
           <p className="text-xl">
             Anguria&nbsp;
           </p>
-          <Button size="sm">
+          <Button size="sm" color="primary">
             Contatto
           </Button> 
         </div>
@@ -65,7 +65,7 @@ export default function DatingPage() {
           <p className="text-xl" >
             Limone&nbsp;
           </p>
-          <Button size="sm">
+          <Button size="sm" color="primary">
             Contatto
           </Button> 
         </div>
@@ -75,7 +75,7 @@ export default function DatingPage() {
           <p className="text-xl">
             Banana&nbsp;
           </p>
-          <Button size="sm">
+          <Button size="sm" color="primary">
             Contatto
           </Button> 
         </div>
@@ -83,15 +83,16 @@ export default function DatingPage() {
       </div>
       <br/>
       <Switch
+        color="danger"
         classNames={{
           base: cn(
             "inline-flex flex-row-reverse w-full max-w-md bg-content1 hover:bg-content2 items-center",
             "justify-between cursor-pointer rounded-lg gap-2 p-4 border-2 border-transparent",
-            "data-[selected=true]:border-primary",
+            "data-[selected=true]:border-danger",
           ),
           wrapper: "p-0 h-4 overflow-visible",
           thumb: cn("w-6 h-6 border-2 shadow-lg",
-            "group-data-[hover=true]:border-primary",
+            "group-data-[hover=true]:border-danger",
             //selected
             "group-data-[selected=true]:ml-6",
             // pressed
@@ -101,7 +102,7 @@ export default function DatingPage() {
         }}
       >
         <div className="flex flex-col gap-1">
-          <p className="text-medium">Condividi Contatto</p>
+          <p className="text-medium font-bold">Condividi Contatto</p>
           <p className="text-tiny text-default-400">
           Se queste persone lo richiedono condivideremo in automatio il tuo contatto
           </p>

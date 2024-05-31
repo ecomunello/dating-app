@@ -8,6 +8,8 @@ import {MaskSadIcon} from "../../components/icon/MaskSadIcon";
 import {Switch, cn} from "@nextui-org/react";
 import {Button} from "@nextui-org/react";
 import {Avatar} from "@nextui-org/react";
+import {Textarea} from "@nextui-org/react";
+import {Progress} from "@nextui-org/react";
 
 import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
@@ -18,9 +20,9 @@ export default function DatingPage() {
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
       
       <div className="inline-block max-w-lg text-center justify-center">
-        <p className="text-3xl">Let's&nbsp;meeting </p>
+        <p className="text-3xl">In meeting </p>
         <p className="text-2xl text-pink-600">
-           with...&nbsp;
+           con...&nbsp;
         </p>
       </div>
 {/* 
@@ -42,6 +44,13 @@ export default function DatingPage() {
           </CardFooter>
         </Card>
       </div> */}
+      
+      <div className="flex flex-col gap-6 w-full max-w-md">
+        <Progress label="Meeting fatti" showValueLabel={true} color="primary" size="sm" aria-label="Loading..." value={40} />
+      </div> 
+
+      <p className="text-xl font-bold">Posto 10 - Avocado</p>
+
       <div className="flex gap-3 items-center">
         <Avatar showFallback isBordered radius="full" isDisabled src="./fruit-8.jpeg" className="w-6 h-6 text-tiny"  />
         <Avatar showFallback isBordered radius="full" isDisabled  src="./fruit-7.jpeg" size="lg" />
@@ -49,9 +58,6 @@ export default function DatingPage() {
         <Avatar showFallback isBordered radius="full" isDisabled  src="./fruit-2.jpeg" size="lg" />
         <Avatar showFallback isBordered radius="full" isDisabled  src="./fruit-4.jpeg" className="w-6 h-6 text-tiny"  />
       </div>
-
-
-      <p className="text-xl font-bold">Avocado</p>
 
       <h2 className={subtitle({ class: "mt-4" })}>
           Attratività
