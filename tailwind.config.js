@@ -17,24 +17,9 @@ module.exports = {
   },
   darkMode: "class",
   plugins: [
-    nextui({
-      addCommonColors: true,
-      themes: {
-        light: {
-          colors: {
-            primary: "#F5A524",
-            secondary: "#e879f9",
-            background:"#F4F4F5"
-          }
-        },
-        dark: {
-          colors: {
-            primary: "#d97706",
-            secondary: "#7e22ce",
-            background: "#0f172a"
-          }
-        },
-      },
-    })
+    require('daisyui')
   ],
+  daisyui: {
+    themes: ["cupcake"]
+  },
 }
