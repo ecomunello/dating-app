@@ -8,6 +8,7 @@ interface User {
   id: string
   name: string
   src: string
+  gender: string
 }
 
 async function getUsers(type: string) {
@@ -24,6 +25,11 @@ async function getUsers(type: string) {
   else return users
 }
 
+function getRandomInt(max: number) {
+  return Math.floor(Math.random() * max);
+}
+
+
 export default async function DatingPage() {
   const users: User[]  = await getUsers("prev")
 
@@ -39,15 +45,15 @@ export default async function DatingPage() {
         </p>
       </div>    
      
-      <p className="text-xl font-bold">Posto 10 - {users[0].name}</p>
+      <p className="text-xl font-bold">Posto 10 - {users[getRandomInt(9)].name}</p>
 
       <div className="flex gap-3 items-center">
         
-        <Avatar src={users[2].src} type = "" />
-        <Avatar src={users[1].src} type = "secondary" />
-        <Avatar src={users[0].src} type = "active" />
-        <Avatar src={users[3].src} type = "secondary"  />
-        <Avatar src={users[4].src} type = ""  />
+        <Avatar src={users[getRandomInt(9)].src} type = "" />
+        <Avatar src={users[getRandomInt(9)].src} type = "secondary" />
+        <Avatar src={users[getRandomInt(9)].src} type = "active" />
+        <Avatar src={users[getRandomInt(9)].src} type = "secondary"  />
+        <Avatar src={users[getRandomInt(9)].src} type = ""  />
       </div>
     
       <RangeBar label="Attratività"/>
