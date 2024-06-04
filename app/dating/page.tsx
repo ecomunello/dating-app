@@ -32,37 +32,40 @@ function getRandomInt(max: number) {
 
 export default async function DatingPage() {
   const users: User[]  = await getUsers("prev")
-
+  const actualDate: User = users[getRandomInt(9)]
   //const meetingDonePerc = Math.round(dataPrev.length / (dataNext.length + dataPrev.length)*100)
  
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-8">
       
       <div className="inline-block max-w-lg text-center justify-center">
-        <p className="text-3xl">Prossimo incontro </p>
-        <p className="text-2xl text-pink-600">
-           con...&nbsp;
-        </p>
+        <p className="text-4xl font-bold pb-3">Dating</p>
+        <p className="text-l">Stai per incontrare...</p>
       </div>    
-     
-      <p className="text-xl font-bold">Posto 10 - {users[getRandomInt(9)].name}</p>
 
       <div className="flex gap-3 items-center">
-        
         <Avatar src={users[getRandomInt(9)].src} type = "" />
         <Avatar src={users[getRandomInt(9)].src} type = "secondary" />
-        <Avatar src={users[getRandomInt(9)].src} type = "active" />
+        <Avatar src={actualDate.src} type = "active" />
         <Avatar src={users[getRandomInt(9)].src} type = "secondary"  />
         <Avatar src={users[getRandomInt(9)].src} type = ""  />
       </div>
+
+
+
+      
+      <div role="alert" className="alert">
+        <p className="text-xl font-bold uppercase">{actualDate.name}</p>
+      </div>
+
     
-      <RangeBar label="Attratività"/>
-      <RangeBar label="Interazioni"/>
-      <RangeBar label="Interessi Comuni"/>
+      <RangeBar label="Attratività" message="Quanto era bello, attraente nel fisico e nello stile"/>
+      <RangeBar label="Interazioni" message="Quanto è stato facile interagirci"/>
+      <RangeBar label="Interessi Comuni" message="Quanto avevate in comune"/>
 
 
       <SwitchBox 
-        message="Se già lo conosci o se assolutamente non vuoi averci più a che fare" 
+        message="Se assolutamente non vuoi averci più a che fare..." 
         title ="Ignora incontro"
       />
 

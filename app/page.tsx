@@ -8,7 +8,7 @@ export default function Home() {
       
       <div className="inline-block max-w-lg text-center justify-center py-10">
         <h1 className="text-3xl">Conosci nuovi </h1>
-        <h1 className="text-5xl text-pink-600">
+        <h1 className="text-5xl text-secondary">
            Amici
         </h1>
       </div>
