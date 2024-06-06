@@ -1,5 +1,6 @@
 import { list } from "postcss";
 import React from "react";
+import { headers } from 'next/headers';
 
 interface Props {
     src: string
@@ -7,17 +8,19 @@ interface Props {
   }
 
 const Avatar = (props: Props) =>{
-    var classes = "w-6 h-6 text-tiny opacity-20";
+    const headersList = headers();
+    const baseUrl = "http://" + headersList.get('host')
+    var classes = "w-6 h-6 opacity-20";
     if (props.type == "active"){
-        classes = "w-32 h-32 text-large"
+        classes = "w-28 h-28"
     } else if (props.type == "secondary"){
-        classes = "w-20 h-20 text-tiny opacity-45"
+        classes = "w-20 h-20 opacity-45"
     }
     
     return (
         <div className="avatar">
             <div className={"rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 " + classes}>
-                <img src={props.src} />
+                <img src={baseUrl + props.src} />
             </div>
         </div>
     )

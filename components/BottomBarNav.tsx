@@ -18,7 +18,7 @@ const BottomBarNav = () =>{
   return (
       <div className="btm-nav">
      
-      <a role="button" href="/dating"className={`${pathname === "/dating" ? activeClass : disableCLass } text-primary `}>
+      <a role="button" href="/dating/8"className={`${pathname === "/dating" ? activeClass : disableCLass } text-primary `}>
         <HeartIcon className="text-2xl" />
         <span className="btm-nav-label">Dating</span>
       </a>
@@ -26,7 +26,7 @@ const BottomBarNav = () =>{
         <ChartIcon className="text-2xl" />
         <span className="btm-nav-label">Dashboard</span>
       </a>
-      <a role="button" href="/" className={`${pathname === "/profile" ? activeClass : disableCLass } text-primary`}>
+      <a role="button" href="/dating/2" className={`${pathname === "/profile" ? activeClass : disableCLass } text-primary`}>
         <UserIcon className="text-2xl" />
         <span className="btm-nav-label">Profile</span>
       </a>
