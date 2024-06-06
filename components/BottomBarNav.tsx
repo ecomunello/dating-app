@@ -18,7 +18,7 @@ const BottomBarNav = () =>{
   return (
       <div className="btm-nav">
      
-      <a role="button" href="/dating/8"className={`${pathname === "/dating" ? activeClass : disableCLass } text-primary `}>
+      <a role="button" href="/dating/8"className={`${pathname.includes("/dating") ? activeClass : disableCLass } text-primary `}>
         <HeartIcon className="text-2xl" />
         <span className="btm-nav-label">Dating</span>
       </a>
