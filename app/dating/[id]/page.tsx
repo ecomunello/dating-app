@@ -1,9 +1,10 @@
 import { headers } from 'next/headers';
 import RangeBar from "@/components/RangeBar";
 import Avatar from "@/components/Avatar";
-import SwitchBox from "@/components/SwitchBox";
+
 import { createClient } from '@supabase/supabase-js'
 import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
 
 class User {
   id: number
@@ -20,7 +21,7 @@ class User {
 
 }
 
-async function getUsers(gender: string) {
+async function getUsers() {
   const supabase = createClient(
     'https://dnwzvsbmjnrqkgpohllv.supabase.co', 
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRud3p2c2Jtam5ycWtncG9obGx2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTc1MTYzNTQsImV4cCI6MjAzMzA5MjM1NH0.Risknq8ShXrJYzMOG4QOU9D8DXhX9nbnuytcMyAeYT0'
@@ -28,25 +29,22 @@ async function getUsers(gender: string) {
 
   let { data: users, error } = await supabase
   .from('users')
-  .select().eq('gender', gender).returns<User[]>()
+  .select().returns<User[]>()
 
   if (users == null) return []
   else return users
 }
 
-function getActiveUser(users: User[], id: number): User{
-  var user = users.find(x => x.id == id)
-  if (user === undefined ) return new User(10,"Fallback","/fruits/pumpkin.png","M")
-  else return user
-}
-
 export default async function DatingPage({ params }: { params: { id: number } }) {
   revalidatePath('/dating/[id]', 'page')
 
-  const users: User[]  = await getUsers("F")
-  const actualDate: User  = getActiveUser(users, params.id)
-  
-  return (
+  const users: User[]  = await getUsers()
+  const actualDate: User | undefined  = users.find(x => x.id == params.id)
+
+  if (actualDate === undefined ) {
+    revalidatePath('/error') // Update cached posts
+    redirect(`/error`) // Navigate to the new post page
+  } else return (
     <section className="flex flex-col items-center justify-center gap-4 py-8">
       
       <div className="inline-block max-w-lg text-center justify-center">
