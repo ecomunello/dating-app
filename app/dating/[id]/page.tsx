@@ -1,4 +1,5 @@
 import RangeBar from "@/components/RangeBar";
+import BoxWithCounter from "@/components/BoxWithCounter";
 import Avatar from "@/components/Avatar";
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
@@ -46,6 +47,7 @@ export default async function DatingPage({ params }: { params: { id: number } })
 
   }
 
+
   if (
     actualUser === undefined
     ||actualDate === undefined 
@@ -67,10 +69,8 @@ export default async function DatingPage({ params }: { params: { id: number } })
         <Avatar src={next2Date.src} type = ""  />
       </div>
 
-      <div role="alert" className="alert p-1 bg-slate-800 text-white">
-        <p><span>Incontrati con </span><span className="text-l font-bold uppercase">{actualDate.name}</span></p>
-      </div>
-    
+      <BoxWithCounter name={actualDate.name} />
+
       <RangeBar label="Attratività" message="Quanto era bello, attraente nel fisico e nello stile"/>
       <RangeBar label="Interazioni" message="Quanto è stato facile interagirci"/>
       <RangeBar label="Interessi Comuni" message="Quanto avevate in comune"/>
@@ -90,6 +90,9 @@ export default async function DatingPage({ params }: { params: { id: number } })
         </div>
       </div>
       <p className="text-xs text-gray-700 pb-3 text-center">Nota: Se assolutamente non vuoi averci più a che fare premi "Scarta"</p>
+
     </section>
   );
+  
+ 
 }
