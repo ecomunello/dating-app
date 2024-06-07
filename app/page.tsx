@@ -55,7 +55,7 @@ export default async function Home() {
           <SelectInput items={users} label="Seleziona il tuo utente" id="userId"/>
           <Input type="password" label="Codice Accesso" value="1234" placeholder="Inserisci la tua password" />
           <Input type="text" label="Contatto IG" value="@profiloig" placeholder="Inserisci il tuo profilo IG" />
-          <button type="submit" className="btn btn-wide btn-primary">Inizia a giocare</button>
+          <button type="submit" className="btn btn-wide bg-slate-800 text-white">Inizia a giocare</button>
         </form>
       </div>
 

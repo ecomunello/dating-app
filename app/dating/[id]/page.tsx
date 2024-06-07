@@ -2,28 +2,69 @@ import RangeBar from "@/components/RangeBar";
 import Avatar from "@/components/Avatar";
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import {User, getUsers} from "../../api/supabase"
+import {User, getUsers, DateTrack, getDateTrack} from "../../api/supabase"
+
+function getUserById(users: User[], id : number){
+  return users.find(x => x.id == id)
+}
 
 export default async function DatingPage({ params }: { params: { id: number } }) {
   revalidatePath('/dating/[id]', 'page')
 
   const users: User[]  = await getUsers()
-  const actualDate: User | undefined  = users.find(x => x.id == params.id)
+  const actualUser: User | undefined = getUserById(users, params.id )
+  const dateTrackList: DateTrack[] =  await getDateTrack(params.id, false)
+  const dateTrackListOld: DateTrack[] =  await getDateTrack(params.id, true)
+  const actualDate: User | undefined  = getUserById(users, dateTrackList[0].user_date_id )
+  const nextDate: User | undefined  = getUserById(users, dateTrackList[1].user_date_id )
+  const next2Date: User | undefined  = getUserById(users, dateTrackList[2].user_date_id )
 
-  if (actualDate === undefined ) {
+  var lastDate: User | undefined  = undefined
+  var last2Date: User | undefined  = undefined
+  
+  const blankMan = new User(0,"Missing","/blank_man.jpg","M")
+  const blankWoman = new User(0,"Missing","/blank_woman.jpg","F")
+
+  if (dateTrackListOld.length >= 2 &&  actualUser != undefined){
+    lastDate = getUserById(users, dateTrackListOld[0].user_date_id )
+    last2Date = getUserById(users, dateTrackListOld[1].user_date_id )
+  }else if (dateTrackListOld.length >= 1 &&  actualUser != undefined ){
+    lastDate = getUserById(users, dateTrackListOld[0].user_date_id )
+    if (actualUser.gender == "M") {
+      last2Date=blankWoman
+    } else{
+      last2Date=blankMan
+    }
+  }else if (actualUser != undefined ){
+    if (actualUser.gender == "M") {
+      last2Date=blankWoman
+      lastDate=blankWoman
+    } else{
+      last2Date=blankMan
+      lastDate=blankMan
+    }
+
+  }
+
+  if (
+    actualUser === undefined
+    ||actualDate === undefined 
+    || nextDate === undefined  
+    || next2Date === undefined 
+    || lastDate === undefined 
+    || last2Date === undefined 
+  ) {
     revalidatePath('/error') // Update cached posts
     redirect(`/error`) // Navigate to the new post page
   } else return (
     <section className="flex flex-col items-center justify-center gap-4 py-8">
-      
-      
 
       <div className="flex gap-3 items-center">
-        <Avatar src={users[Math.abs(params.id-2)].src} type = "" />
-        <Avatar src={users[Math.abs(params.id-1)].src} type = "secondary" />
+        <Avatar src={last2Date.src} type = "" />
+        <Avatar src={lastDate.src} type = "secondary" />
         <Avatar src={actualDate.src} type = "active" />
-        <Avatar src={users[Math.abs(params.id-3)].src} type = "secondary"  />
-        <Avatar src={users[Math.abs(params.id-4)].src} type = ""  />
+        <Avatar src={nextDate.src} type = "secondary"  />
+        <Avatar src={next2Date.src} type = ""  />
       </div>
 
       <div role="alert" className="alert p-1 bg-slate-800 text-white">
