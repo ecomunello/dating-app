@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect } from "react";
 
 export default function Error({
@@ -14,11 +13,11 @@ export default function Error({
     /* eslint-disable no-console */
     console.error(error);
   }, [error]);
-
   return (
-    <div>
-      <h2>Something went wrong!</h2>
-      <button
+    <section className="flex flex-col items-center justify-center gap-2 py-10">
+      <img src="../../../error.png" />
+      <h1 className="text-2xl text-center">Sembra qualcosa sia andato in errore</h1>
+      <button className="btn btn-outline btn-error"
         onClick={
           // Attempt to recover by trying to re-render the segment
           () => reset()
@@ -26,6 +25,6 @@ export default function Error({
       >
         Try again
       </button>
-    </div>
+    </section>
   );
 }

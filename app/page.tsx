@@ -2,31 +2,9 @@
 import React from "react";
 import Input from "@/components/input";
 import SelectInput from "@/components/SelectInput";
-import { createClient } from '@supabase/supabase-js'
-import { FormEvent } from 'react'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-
-interface User {
-  id: string
-  name: string
-  src: string
-  gender: string
-}
-
-async function getUsers() {
-  const supabase = createClient(
-    'https://dnwzvsbmjnrqkgpohllv.supabase.co', 
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRud3p2c2Jtam5ycWtncG9obGx2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTc1MTYzNTQsImV4cCI6MjAzMzA5MjM1NH0.Risknq8ShXrJYzMOG4QOU9D8DXhX9nbnuytcMyAeYT0'
-  )
-
-  let { data: users, error } = await supabase
-  .from('users')
-  .select().returns<User[]>()
-
-  if (users == null) return []
-  else return users
-}
+import {User, getUsers} from "./api/supabase"
 
 export default async function Home() {
   const users: User[]  = await getUsers()

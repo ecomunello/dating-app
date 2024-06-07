@@ -12,7 +12,7 @@ const Avatar = (props: Props) =>{
     const baseUrl = "http://" + headersList.get('host')
     var classes = "w-6 h-6 opacity-20";
     if (props.type == "active"){
-        classes = "w-28 h-28"
+        classes = "w-28 h-28 "
     } else if (props.type == "secondary"){
         classes = "w-20 h-20 opacity-45"
     }

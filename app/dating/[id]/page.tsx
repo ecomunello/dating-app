@@ -1,39 +1,8 @@
-import { headers } from 'next/headers';
 import RangeBar from "@/components/RangeBar";
 import Avatar from "@/components/Avatar";
-
-import { createClient } from '@supabase/supabase-js'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-
-class User {
-  id: number
-  name: string
-  src: string
-  gender: string
-
-  public constructor(id: number, name: string, src: string, gender: string) {
-    this.id = id;
-    this.name = name;
-    this.src = src;
-    this.gender = gender;
-  }
-
-}
-
-async function getUsers() {
-  const supabase = createClient(
-    'https://dnwzvsbmjnrqkgpohllv.supabase.co', 
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRud3p2c2Jtam5ycWtncG9obGx2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTc1MTYzNTQsImV4cCI6MjAzMzA5MjM1NH0.Risknq8ShXrJYzMOG4QOU9D8DXhX9nbnuytcMyAeYT0'
-  )
-
-  let { data: users, error } = await supabase
-  .from('users')
-  .select().returns<User[]>()
-
-  if (users == null) return []
-  else return users
-}
+import {User, getUsers} from "../../api/supabase"
 
 export default async function DatingPage({ params }: { params: { id: number } }) {
   revalidatePath('/dating/[id]', 'page')
@@ -47,10 +16,7 @@ export default async function DatingPage({ params }: { params: { id: number } })
   } else return (
     <section className="flex flex-col items-center justify-center gap-4 py-8">
       
-      <div className="inline-block max-w-lg text-center justify-center">
-        <p className="text-4xl font-bold pb-3">Dating</p>
-        <p className="text-l">Stai per incontrare...</p>
-      </div>    
+      
 
       <div className="flex gap-3 items-center">
         <Avatar src={users[Math.abs(params.id-2)].src} type = "" />
@@ -60,8 +26,8 @@ export default async function DatingPage({ params }: { params: { id: number } })
         <Avatar src={users[Math.abs(params.id-4)].src} type = ""  />
       </div>
 
-      <div role="alert" className="alert p-1">
-        <p className="text-l font-bold uppercase">{actualDate.name}</p>
+      <div role="alert" className="alert p-1 bg-slate-800 text-white">
+        <p><span>Incontrati con </span><span className="text-l font-bold uppercase">{actualDate.name}</span></p>
       </div>
     
       <RangeBar label="Attratività" message="Quanto era bello, attraente nel fisico e nello stile"/>

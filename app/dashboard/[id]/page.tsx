@@ -1,71 +1,50 @@
-import { siteConfig } from "@/config/site";
-import { createClient } from '@supabase/supabase-js'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import MatchBox from "@/components/MatchBox";
 import SpecialMatchBox from "@/components/SpecialMatchBox";
-
-class User {
-  id: number
-  name: string
-  src: string
-  gender: string
-
-  public constructor(id: number, name: string, src: string, gender: string) {
-    this.id = id;
-    this.name = name;
-    this.src = src;
-    this.gender = gender;
-  }
-
-}
-
-class BestMatch{
-  id: number
-  user_id: number
-  match_id: number
-
-  public constructor(id: number, user_id: number, match_id: number) {
-    this.id = id;
-    this.user_id = user_id;
-    this.match_id = match_id;
-  }
-}
-
-const supabase = createClient(
-  'https://dnwzvsbmjnrqkgpohllv.supabase.co', 
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRud3p2c2Jtam5ycWtncG9obGx2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTc1MTYzNTQsImV4cCI6MjAzMzA5MjM1NH0.Risknq8ShXrJYzMOG4QOU9D8DXhX9nbnuytcMyAeYT0'
-)
+import {User, BestMatch, getUsers, getBestMatch} from "../../api/supabase"
 
 function redirectError(){
   revalidatePath('/error') // Update cached posts
   redirect(`/error`) // Navigate to the new post page
 }
 
-async function getBestMatch(id: number){
-  let { data: bestmatch, error } = await supabase
-  .from('bestmatch')
-  .select('*').eq('user_id', id).returns<BestMatch[]>()
-  
-  if (bestmatch == null) return []
-  else return bestmatch
-}
-
-async function getUsers() {
-  
-  let { data: users, error } = await supabase
-  .from('users')
-  .select().returns<User[]>()
-
-  if (users == null) return []
-  else return users
-}
-
 export default async function DashboardPage({ params }: { params: { id: number } }) {
   const users: User[]  = await getUsers()
   const matches: BestMatch[]  = await getBestMatch(params.id)
 
-  if (typeof users == 'undefined' || users.length == 0) redirectError()
+  if (typeof users == 'undefined' || users.length == 0) {redirectError()}
+
+  if (matches.length == 0){
+    return (
+      <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
+      <div className="divider">
+          Scopri i tuoi incontri
+      </div>
+      <div role="tablist" className="tabs tabs-boxed">
+        <a role="tab" className="tab tab-active bg-secondary">Best Match</a>
+        <a role="tab" className="tab">Tuoi Preferiti</a>
+        <a role="tab" className="tab">Overall</a>
+      </div>
+
+     
+      <div className="grid grid-cols-1 gap-4 py-2">
+      <div role="alert" className="alert bg-slate-800 text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-current shrink-0 w-8 h-8"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <span>Non ci sono ancora dati, ripassa più tardi, qui troverai i tuoi migliori match.</span>
+      </div>
+      </div>
+
+      <div className="divider">
+        Menzioni speciali
+      </div>
+      <div role="alert" className="alert bg-slate-800 text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-current shrink-0 w-8 h-8"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <span>Non ci sono ancora dati, ripassa più tardi, qui troverai le persone cui hai avuto più intesa.</span>
+      </div>
+      </section>
+    )
+  }
 
   const match1 = users.find(x => x.id == matches[0].match_id)
   const match2 = users.find(x => x.id == matches[1].match_id)
@@ -77,23 +56,16 @@ export default async function DashboardPage({ params }: { params: { id: number }
     redirectError()
   } else return (
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      
-      <div className="inline-block max-w-lg text-center justify-center">
-        <p className="text-3xl">Dashboard</p>
-        <p className="text-2xl text-pink-600">
-          Incontri&nbsp;
-        </p>
+      <div className="divider">
+          Scopri i tuoi incontri
       </div>
-
       <div role="tablist" className="tabs tabs-boxed">
-        <a role="tab" className="tab tab-active bg-secondary">Best</a>
-        <a role="tab" className="tab">Besty</a>
+        <a role="tab" className="tab tab-active bg-secondary">Best Match</a>
+        <a role="tab" className="tab">Tuoi Preferiti</a>
         <a role="tab" className="tab">Overall</a>
       </div>
 
-      <div className="divider">
-          I tuoi 5 incontri migliori
-      </div>
+     
       <div className="grid grid-cols-2 gap-4 py-2">
        <MatchBox name={match1.name} src={match1.src} contact="@nomeprofiloIG1"/>
        <MatchBox name={match2.name} src={match2.src} contact="@nomeprofiloIG2"/>
