@@ -1,7 +1,7 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import SwitchBox from "@/components/SwitchBox";
-import {User, getUsers} from "../../api/supabase"
+import {User, getUsers} from "../../../api/supabase"
 
 export default async function DatingPage({ params }: { params: { id: number } }) {
   revalidatePath('/dating/[id]', 'page')
@@ -11,7 +11,7 @@ export default async function DatingPage({ params }: { params: { id: number } })
 
   if (profile === undefined ) {
     revalidatePath('/error') // Update cached posts
-    redirect(`/error`) // Navigate to the new post page
+    redirect(`/error?message="Errore 1: dati undefined"`) // Navigate to the new post page
   } else return (
     <section className="flex flex-col items-center justify-center gap-4 py-8">
       

@@ -2,16 +2,28 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import MatchBox from "@/components/MatchBox";
 import SpecialMatchBox from "@/components/SpecialMatchBox";
-import {User, BestMatch, getUsers, getBestMatch} from "../../api/supabase"
+import {User, DateTrack, getUsers, getDateTrackDashboard} from "../../../api/supabase"
 
 function redirectError(){
   revalidatePath('/error') // Update cached posts
-  redirect(`/error`) // Navigate to the new post page
+  redirect(`/error?message="Errore 3: dati undefined"`) // Navigate to the new post page
+}
+
+function getUserName(users: User[], date: DateTrack): string {
+  const user = users.find(x => x.id == date.user_date_id)
+  if (user == undefined) return ""
+  else return user.name
+}
+
+function getUserSrc(users: User[], date: DateTrack): string {
+  const user = users.find(x => x.id == date.user_date_id)
+  if (user == undefined) return ""
+  else return user.src
 }
 
 export default async function DashboardPage({ params }: { params: { id: number } }) {
   const users: User[]  = await getUsers()
-  const matches: BestMatch[]  = await getBestMatch(params.id)
+  const matches: DateTrack[]  = await getDateTrackDashboard(params.id, true)
 
   if (typeof users == 'undefined' || users.length == 0) {redirectError()}
 
@@ -46,15 +58,7 @@ export default async function DashboardPage({ params }: { params: { id: number }
     )
   }
 
-  const match1 = users.find(x => x.id == matches[0].match_id)
-  const match2 = users.find(x => x.id == matches[1].match_id)
-  const match3 = users.find(x => x.id == matches[2].match_id)
-  const match4 = users.find(x => x.id == matches[3].match_id)
-  const match5 = users.find(x => x.id == matches[4].match_id)
-
-  if (match1 === undefined || match2 === undefined || match3 === undefined || match4 === undefined || match5 === undefined) {
-    redirectError()
-  } else return (
+  return (
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
       <div className="divider">
           Scopri i tuoi incontri
@@ -67,13 +71,13 @@ export default async function DashboardPage({ params }: { params: { id: number }
 
      
       <div className="grid grid-cols-2 gap-4 py-2">
-       <MatchBox name={match1.name} src={match1.src} contact="@nomeprofiloIG1"/>
-       <MatchBox name={match2.name} src={match2.src} contact="@nomeprofiloIG2"/>
-       <MatchBox name={match3.name} src={match3.src} contact="@nomeprofiloIG3"/>
-       <MatchBox name={match4.name} src={match4.src} contact="@nomeprofiloIG4"/>
-      </div>
-      <div className="grid grid-cols-1 gap-4">
-        <MatchBox name={match5.name} src={match5.src} contact="@nomeprofiloIG5" />
+        {
+        matches.map(
+          (match) => (
+                <MatchBox name={getUserName(users, match)} src={getUserSrc(users, match)} contact="@nomeprofiloIG1"/>
+              )
+            )
+        }
       </div>
 
       <div className="divider">
@@ -83,8 +87,13 @@ export default async function DashboardPage({ params }: { params: { id: number }
         Qui trovi le persone con cui l'intesa è stata particolarmente alta
       </p>
       <div className="grid grid-cols-2 gap-4 py-2">
-        <SpecialMatchBox name={match1.name} src={match1.src}/>
-        <SpecialMatchBox name={match4.name} src={match4.src}/>
+      {
+        matches.map(
+          (match) => (
+                <SpecialMatchBox name={getUserName(users, match)} src={getUserSrc(users, match)} />
+              )
+            )
+        }
       </div>
     </section>
   );

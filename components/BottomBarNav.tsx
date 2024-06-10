@@ -8,9 +8,6 @@ import { LogoutIcon } from "@/components/icon/LogoutIcon";
 import { usePathname } from 'next/navigation'
 import { useParams } from 'next/navigation'
 
-
-
-
 const BottomBarNav = () =>{
   const pathname = usePathname()
   const activeClass = "active bg-slate-800 text-secondary"

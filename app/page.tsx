@@ -4,7 +4,7 @@ import Input from "@/components/input";
 import SelectInput from "@/components/SelectInput";
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import {User, getUsers} from "./api/supabase"
+import {User, getUsers} from "../api/supabase"
 
 export default async function Home() {
   const users: User[]  = await getUsers()
