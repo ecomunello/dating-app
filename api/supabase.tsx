@@ -76,6 +76,18 @@ export async function getDateTrack(id: number, date_done: boolean){
   else return datetrack
 }
 
+export async function getDateTrackUserDate(id: number, date_done: boolean){
+  let { data: datetrack, error } = await supabase
+  .from('datetrack')
+  .select('*')
+  .eq('user_date_id', id)
+  .eq('date_done', date_done)
+  .returns<DateTrack[]>()
+  
+  if (datetrack == null) return []
+  else return datetrack
+}
+
 export async function getDateTrackDashboard(id: number, date_done: boolean){
   let { data: datetrack, error } = await supabase
   .from('datetrack')

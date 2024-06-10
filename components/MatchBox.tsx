@@ -17,7 +17,7 @@ const MatchBox = (props: Props) =>{
     
   return (
     <div className="card card-side bg-slate-800 text-white shadow-xl items-center">
-    <figure><img className="w-16 p-2 ml-2 rounded" src={props.src} alt="Movie"/></figure>
+    <figure><img className="w-14 p-2 ml-2 rounded" src={props.src} alt="Movie"/></figure>
     <div className="card-body p-3 items-center">
       <p className="card-title text-sm">{props.name}</p>
       <div className="card-actions">

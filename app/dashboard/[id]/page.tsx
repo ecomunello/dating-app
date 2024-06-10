@@ -3,19 +3,20 @@ import { redirect } from 'next/navigation'
 import MatchBox from "@/components/MatchBox";
 import SpecialMatchBox from "@/components/SpecialMatchBox";
 import {User, DateTrack, getUsers, getDateTrackDashboard} from "../../../api/supabase"
+import {Score, calculateBestMatch} from "../../../api/metrics"
 
 function redirectError(){
   revalidatePath('/error') // Update cached posts
   redirect(`/error?message="Errore 3: dati undefined"`) // Navigate to the new post page
 }
 
-function getUserName(users: User[], date: DateTrack): string {
+function getUserName(users: User[], date: Score): string {
   const user = users.find(x => x.id == date.user_date_id)
   if (user == undefined) return ""
   else return user.name
 }
 
-function getUserSrc(users: User[], date: DateTrack): string {
+function getUserSrc(users: User[], date: Score): string {
   const user = users.find(x => x.id == date.user_date_id)
   if (user == undefined) return ""
   else return user.src
@@ -25,9 +26,11 @@ export default async function DashboardPage({ params }: { params: { id: number }
   const users: User[]  = await getUsers()
   const matches: DateTrack[]  = await getDateTrackDashboard(params.id, true)
 
+  const scores = await calculateBestMatch(params.id)
+
   if (typeof users == 'undefined' || users.length == 0) {redirectError()}
 
-  if (matches.length == 0){
+  if (scores.length == 0){
     return (
       <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
       <div className="divider">
@@ -72,9 +75,9 @@ export default async function DashboardPage({ params }: { params: { id: number }
      
       <div className="grid grid-cols-2 gap-4 py-2">
         {
-        matches.map(
-          (match) => (
-                <MatchBox name={getUserName(users, match)} src={getUserSrc(users, match)} contact="@nomeprofiloIG1"/>
+        scores.map(
+          (score) => (
+                <MatchBox name={getUserName(users, score)} src={getUserSrc(users, score)} contact="@nomeprofiloIG1"/>
               )
             )
         }
@@ -88,9 +91,11 @@ export default async function DashboardPage({ params }: { params: { id: number }
       </p>
       <div className="grid grid-cols-2 gap-4 py-2">
       {
-        matches.map(
-          (match) => (
-                <SpecialMatchBox name={getUserName(users, match)} src={getUserSrc(users, match)} />
+        scores.filter(function(score) {
+          return score.score>8;
+        }).map(
+          (score) => (
+                <SpecialMatchBox name={getUserName(users, score)} src={getUserSrc(users, score)} />
               )
             )
         }
