@@ -50,11 +50,11 @@ export default async function DatingPage({ params }: { params: { id: number } })
   var nextDate: User   = defaultAvatar(actualUser)
   var next2Date: User = defaultAvatar(actualUser)
 
-  if (dateTrackList.length >= 2){
-    nextDate = getUserById(users, actualUser, dateTrackList[0].user_date_id )
-    next2Date = getUserById(users, actualUser, dateTrackList[1].user_date_id )
-  } else if (dateTrackList.length >= 1 ){
-    nextDate = getUserById(users, actualUser, dateTrackList[0].user_date_id )
+  if (dateTrackList.length >= 3){
+    nextDate = getUserById(users, actualUser, dateTrackList[1].user_date_id )
+    next2Date = getUserById(users, actualUser, dateTrackList[2].user_date_id )
+  } else if (dateTrackList.length >= 2 ){
+    nextDate = getUserById(users, actualUser, dateTrackList[1].user_date_id )
   } 
 
   var lastDate: User  = defaultAvatar(actualUser)
