@@ -80,9 +80,8 @@ export default async function DatingPage({ params }: { params: { id: number } })
 
       <BoxWithCounter name={actualDate.name} />
 
-     <FormVote idUser={params.id} idDate={actualDate.id}/>
+      <FormVote idUser={params.id} idDate={actualDate.id}/>
 
-      <p className="text-xs text-gray-700 pb-3 text-center">Nota: Se assolutamente non vuoi averci più a che fare premi "Scarta"</p>
     </section>
   );
   

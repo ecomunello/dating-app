@@ -19,7 +19,7 @@ const Avatar = (props: Props) =>{
     
     return (
         <div className="avatar">
-            <div className={"rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 " + classes}>
+            <div className={"rounded-full ring ring-slate-800 ring-offset-3 " + classes}>
                 <img src={baseUrl + props.src} />
             </div>
         </div>

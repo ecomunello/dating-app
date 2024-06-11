@@ -1,6 +1,6 @@
 'use client'
 import React from "react";
-
+import {ChatIcon} from "@/components/icon/ChatIcon";
 interface Props {
   name: string
   src: string
@@ -16,18 +16,18 @@ const MatchBox = (props: Props) =>{
   }
     
   return (
-    <div className="card card-side bg-slate-800 text-white shadow-xl items-center">
-    <figure><img className="w-14 p-2 ml-2 rounded" src={props.src} alt="Movie"/></figure>
-    <div className="card-body p-3 items-center">
+    <div onClick={()=>openModal()} className="flex flex-col m-2 p-4 bg-slate-800 text-white shadow-xl rounded-lg items-center">
+      <ChatIcon className="text-3xl mb-2" />
+      <img className="w-full max-w-16 mb-2 rounded" src={props.src} alt="Movie"/>
       <p className="card-title text-sm">{props.name}</p>
-      <div className="card-actions">
-        <button onClick={()=>openModal()} className="btn btn-xs btn-outline btn-secondary">Contatto</button>
-        <dialog id={props.name} className="modal">
-          <div className="modal-box">
-            <h3 className="font-bold text-lg">Il suo contatto!</h3>
-            <p className="py-4">Questo è il contatto di {props.name}, mi raccomando usalo in maniera rispettosa!</p>
-            <a type="button" href="https://www.instagram.com/nomeprofiloIG/" className="btn btn-primary btn-outline btn-wide">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+      
+        
+      <dialog id={props.name} className="modal">
+          <div className="modal-box text-black">
+            <h3 className="font-bold text-lg py-4">Il suo contatto!</h3>
+            <p>Questo è il contatto di {props.name}</p>
+            <p className="py-1">mi raccomando usalo in maniera rispettosa!</p>
+            <a href={"https://www.instagram.com/" + props.contact} className="link link-primary">
               {props.contact}
             </a>
             <div className="modal-action">
@@ -37,9 +37,7 @@ const MatchBox = (props: Props) =>{
             </div>
           </div>
         </dialog>
-      </div>
     </div>
-  </div>
   )
 }
 

@@ -13,26 +13,21 @@ export default async function DatingPage({ params }: { params: { id: number } })
     revalidatePath('/error') // Update cached posts
     redirect(`/error?message="Errore 1: dati undefined"`) // Navigate to the new post page
   } else return (
-    <section className="flex flex-col items-center justify-center gap-4 py-8">
-      
-      <div className="inline-block max-w-lg text-center justify-center">
-        <p className="text-3xl">Profilo</p>
-        <p className="text-2xl text-pink-600">
-          di
-        </p>
-      </div>
-      <h1 className="card-title text-center text-5xl">{profile.name}</h1>
+    <section className="flex flex-wrap gap-4 py-8 ">
       <div className="card w-auto bg-slate-800 text-white shadow-xl">
-        <figure><img className="w-40 mt-8 rounded" src={profile.src} alt="Shoes" /></figure>
         <div className="card-body">
-          <h2 className="card-title text-center">@nomeprofiloIG</h2>
-          <SwitchBox 
-          message="Se lo disattivi il tuo contatto non sarà condiviso con i tuoi 5 migliori match"
+          <figure><img className="w-40 mt-8 rounded" src={profile.src} alt="Shoes" /></figure>
+          <h1 className="text-3xl font-bold text-center">{profile.name}</h1>
+        </div>
+      </div>
+      <p className="text-center">
+        <span >Contatto: </span><span className="font-bold">@nomeprofiloIG</span>
+      </p>
+      <SwitchBox 
+          message="Se lo disattivi il tuo contatto non sarà condiviso con nessuno"
           title ="Gestione Contatto" 
           isChecked={true}
           />
-        </div>
-      </div>
 
     </section>
   );

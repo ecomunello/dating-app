@@ -66,22 +66,29 @@ export default async function DashboardPage({ params }: { params: { id: number }
       <div className="divider">
           Scopri i tuoi incontri
       </div>
-      <div role="tablist" className="tabs tabs-boxed">
-        <a role="tab" className="tab tab-active bg-secondary">Best Match</a>
-        <a role="tab" className="tab">Tuoi Preferiti</a>
-        <a role="tab" className="tab">Overall</a>
+
+      <div role="tablist" className="tabs tabs-bordered ">
+        <input type="radio" name="my_tabs_2" role="tab" className="tab" aria-label="Migliori" defaultChecked/>
+        <div role="tabpanel" className="tab-content p-2 ">
+          <div className='grid grid-cols-2'>
+          {
+          scores.map(
+            (score) => (
+                  <MatchBox name={getUserName(users, score)} src={getUserSrc(users, score)} contact="@nomeprofiloIG1"/>
+                )
+              )
+          }
+          </div>
+        </div>
+
+        <input type="radio" name="my_tabs_2" role="tab" className="tab" aria-label="Preferiti"  />
+        <div role="tabpanel" className="tab-content p-6"></div>
+
+        <input type="radio" name="my_tabs_2" role="tab" className="tab" aria-label="Overall" />
+        <div role="tabpanel" className="tab-content p-6"></div>
       </div>
 
-     
-      <div className="grid grid-cols-2 gap-4 py-2">
-        {
-        scores.map(
-          (score) => (
-                <MatchBox name={getUserName(users, score)} src={getUserSrc(users, score)} contact="@nomeprofiloIG1"/>
-              )
-            )
-        }
-      </div>
+
 
       <div className="divider">
         Menzioni speciali
