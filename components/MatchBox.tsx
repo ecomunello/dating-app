@@ -16,16 +16,16 @@ const MatchBox = (props: Props) =>{
   }
     
   return (
-    <div onClick={()=>openModal()} className="flex flex-col m-2 p-4 bg-slate-800 text-white shadow-xl rounded-lg items-center">
-      <ChatIcon className="text-3xl mb-2" />
-      <img className="w-full max-w-16 mb-2 rounded" src={props.src} alt="Movie"/>
-      <p className="card-title text-sm">{props.name}</p>
+    <div onClick={()=>openModal()} className="indicator flex flex-col m-2 p-4 bg-slate-800 text-white shadow-xl rounded-lg items-center">
+      <p className="card-title text-sm mb-2">{props.name}</p>
+      <img className="w-full max-w-16 rounded mb-2" src={props.src} alt="Movie"/>
+      <ChatIcon className="text-xl" />
       
         
       <dialog id={props.name} className="modal">
           <div className="modal-box text-black">
             <h3 className="font-bold text-lg py-4">Il suo contatto!</h3>
-            <p>Questo è il contatto di {props.name}</p>
+            <p>Questo è il contatto di <span className="font-bold"> {props.name}</span></p>
             <p className="py-1">mi raccomando usalo in maniera rispettosa!</p>
             <a href={"https://www.instagram.com/" + props.contact} className="link link-primary">
               {props.contact}

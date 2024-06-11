@@ -13,7 +13,7 @@ export default async function DatingPage({ params }: { params: { id: number } })
     revalidatePath('/error') // Update cached posts
     redirect(`/error?message="Errore 1: dati undefined"`) // Navigate to the new post page
   } else return (
-    <section className="flex flex-wrap gap-4 py-8 ">
+    <section className="flex flex-wrap gap-4 py-8 items-center justify-center ">
       <div className="card w-auto bg-slate-800 text-white shadow-xl">
         <div className="card-body">
           <figure><img className="w-40 mt-8 rounded" src={profile.src} alt="Shoes" /></figure>

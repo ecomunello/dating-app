@@ -36,13 +36,6 @@ export default async function DashboardPage({ params }: { params: { id: number }
       <div className="divider">
           Scopri i tuoi incontri
       </div>
-      <div role="tablist" className="tabs tabs-boxed">
-        <a role="tab" className="tab tab-active bg-secondary">Best Match</a>
-        <a role="tab" className="tab">Tuoi Preferiti</a>
-        <a role="tab" className="tab">Overall</a>
-      </div>
-
-     
       <div className="grid grid-cols-1 gap-4 py-2">
       <div role="alert" className="alert bg-slate-800 text-white">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-current shrink-0 w-8 h-8"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -62,14 +55,12 @@ export default async function DashboardPage({ params }: { params: { id: number }
   }
 
   return (
-    <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
+    <section className="flex flex-col items-center justify-center gap-4 py-8">
       <div className="divider">
-          Scopri i tuoi incontri
+          Scopri i tuoi incontri migliori
       </div>
 
-      <div role="tablist" className="tabs tabs-bordered ">
-        <input type="radio" name="my_tabs_2" role="tab" className="tab" aria-label="Migliori" defaultChecked/>
-        <div role="tabpanel" className="tab-content p-2 ">
+      
           <div className='grid grid-cols-2'>
           {
           scores.map(
@@ -78,14 +69,7 @@ export default async function DashboardPage({ params }: { params: { id: number }
                 )
               )
           }
-          </div>
-        </div>
-
-        <input type="radio" name="my_tabs_2" role="tab" className="tab" aria-label="Preferiti"  />
-        <div role="tabpanel" className="tab-content p-6"></div>
-
-        <input type="radio" name="my_tabs_2" role="tab" className="tab" aria-label="Overall" />
-        <div role="tabpanel" className="tab-content p-6"></div>
+         
       </div>
 
 
@@ -93,10 +77,10 @@ export default async function DashboardPage({ params }: { params: { id: number }
       <div className="divider">
         Menzioni speciali
       </div>
-      <p className="text-xs text-center text-gray-700 pb-3">
+      <p className="text-xs text-center text-gray-700">
         Qui trovi le persone con cui l'intesa è stata particolarmente alta
       </p>
-      <div className="grid grid-cols-2 gap-4 py-2">
+      <div className="grid grid-cols-3 gap-4 py-2">
       {
         scores.filter(function(score) {
           return score.score>8;
@@ -107,6 +91,7 @@ export default async function DashboardPage({ params }: { params: { id: number }
             )
         }
       </div>
+  
     </section>
   );
 }
